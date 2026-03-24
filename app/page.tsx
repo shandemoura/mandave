@@ -3,9 +3,9 @@ import Link from "next/link";
 import ContactForm from "./components/ContactForm";
 
 const categorias = [
-  { nome: "Canecas", icon: "☕", descricao: "Canecas personalizadas para presentes ou uso diário" },
+  { nome: "Canecas", icon: "☕", descricao: "Canecas personalizadas para presente ou uso diário" },
   { nome: "Camisetas", icon: "👕", descricao: "Estampas exclusivas com sua arte ou logotipo" },
-  { nome: "Relógios de Parede", icon: "🕐", descricao: "Relógios únicos cortados e gravados a laser" },
+  { nome: "Relógios de Parede", icon: "🕐", descricao: "Relógios únicos, cortados e gravados a laser" },
   { nome: "Chaveiros", icon: "🔑", descricao: "Chaveiros em acrílico, MDF, ou impressão 3D" },
   { nome: "Sinalização", icon: "🪧", descricao: "Placas, totens e identificações para empresas" },
   { nome: "Brindes", icon: "🎁", descricao: "Brindes corporativos e presentes personalizados" },
@@ -81,7 +81,7 @@ export default function Home() {
               className="rounded-3xl overflow-hidden flex items-center justify-center p-8"
               style={{ background: "var(--surface)", border: "1px solid var(--border)", width: 260, height: 260 }}
             >
-              <Image src="/images/logo.png" alt="Mandavê Personalizados" width={200} height={200} className="object-contain" />
+              <Image src="/images/logo.png" alt="" width={200} height={200} className="object-contain" />
             </div>
           </div>
         </div>
