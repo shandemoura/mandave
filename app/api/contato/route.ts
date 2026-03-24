@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Campos obrigatórios faltando" }, { status: 400 });
     }
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: "Mandavê Site <onboarding@resend.dev>",
       to: process.env.EMAIL_TO!,
       reply_to: email,
@@ -35,9 +35,15 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    if (error) {
+      console.error("Resend retornou erro:", JSON.stringify(error));
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    console.log("E-mail enviado com sucesso. ID:", data?.id);
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Erro ao enviar e-mail:", err);
+    console.error("Exceção ao enviar e-mail:", err);
     return NextResponse.json({ error: "Erro ao enviar e-mail" }, { status: 500 });
   }
 }
