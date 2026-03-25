@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 const categorias = [
   "Canecas",
@@ -9,13 +10,22 @@ const categorias = [
   "Sinalização",
   "Brindes",
   "Miniaturas 3D",
+  "Decoração",
   "Outro",
 ];
 
 export default function ContactForm() {
+  const searchParams = useSearchParams();
+  const modeloParam = searchParams.get("modelo") ?? "";
   const [form, setForm] = useState({ nome: "", email: "", telefone: "", categoria: "", mensagem: "" });
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (modeloParam) {
+      setForm((f) => ({ ...f, mensagem: `Modelo escolhido: ${modeloParam}\n\n` }));
+    }
+  }, [modeloParam]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });

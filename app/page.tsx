@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import ContactForm from "./components/ContactForm";
 
 const categorias = [
@@ -8,8 +9,9 @@ const categorias = [
   { nome: "Relógios de Parede", icon: "🕐", descricao: "Relógios únicos, cortados e gravados a laser" },
   { nome: "Chaveiros", icon: "🔑", descricao: "Chaveiros em acrílico, MDF, ou impressão 3D" },
   { nome: "Sinalização", icon: "🪧", descricao: "Placas, totens e identificações para empresas" },
-  { nome: "Brindes", icon: "🎁", descricao: "Brindes corporativos e presentes personalizados" },
-  { nome: "Miniaturas 3D", icon: "🖨️", descricao: "Peças únicas criadas com impressão 3D" },
+  { nome: "Brindes Corporativos", icon: "🎁", descricao: "Brindes corporativos e presentes personalizados" },
+  { nome: "Miniaturas 3D", icon: "🧍", descricao: "Peças únicas criadas com impressão 3D" },
+  { nome: "Decoração", icon: "🖼️", descricao: "Peças decorativas personalizadas para sua casa ou empresa" },
 ];
 
 const galeria = [
@@ -46,7 +48,7 @@ export default function Home() {
             background: "radial-gradient(ellipse at 60% 50%, var(--primary) 0%, transparent 70%)",
           }}
         />
-        <div className="relative max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
+        <div className="relative max-w-4xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
           <div className="flex-1 text-center md:text-left">
             <p style={{ color: "var(--primary)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.1em" }} className="uppercase mb-3">
               Personalização sob medida
@@ -76,14 +78,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="flex-shrink-0">
-            <div
-              className="rounded-3xl overflow-hidden flex items-center justify-center p-8"
-              style={{ background: "var(--surface)", border: "1px solid var(--border)", width: 260, height: 260 }}
-            >
-              <Image src="/images/logo.png" alt="" width={200} height={200} className="object-contain" />
-            </div>
-          </div>
+
         </div>
       </section>
 
@@ -154,7 +149,9 @@ export default function Home() {
         </div>
       </section>
 
-      <ContactForm />
+      <Suspense fallback={null}>
+        <ContactForm />
+      </Suspense>
     </>
   );
 }

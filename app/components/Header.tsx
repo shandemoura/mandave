@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { label: "Início", href: "#inicio" },
-  { label: "Categorias", href: "#categorias" },
-  { label: "Galeria", href: "#galeria" },
-  { label: "Orçamento", href: "#orcamento" },
+  { label: "Início", href: "/#inicio" },
+  { label: "Categorias", href: "/#categorias" },
+  { label: "Catálogo", href: "/catalogo" },
+  { label: "Orçamento", href: "/#orcamento" },
 ];
 
 export default function Header() {
@@ -17,10 +17,10 @@ export default function Header() {
     <header style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }} className="sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <Link href="#inicio" className="flex items-center gap-3">
-          <Image src="/images/logo.png" alt="Mandavê Personalizados" width={48} height={48} className="object-contain" />
-          <span style={{ color: "var(--primary)" }} className="font-bold text-lg tracking-wide hidden sm:block">
+          <Image src="/images/logo.png" alt="Mandavê Personalizados" width={100} height={72} className="object-contain" />
+          {/* <span style={{ color: "var(--primary)" }} className="font-bold text-lg tracking-wide hidden sm:block">
             Mandavê Personalizados
-          </span>
+          </span> */}
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
