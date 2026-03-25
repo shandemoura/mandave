@@ -1,7 +1,10 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import ContactForm from "./components/ContactForm";
+import Lightbox from "./components/Lightbox";
 
 const categorias = [
   { nome: "Canecas", icon: "☕", descricao: "Canecas personalizadas para presente ou uso diário" },
@@ -39,6 +42,13 @@ const diferenciais = [
 ];
 
 export default function Home() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const openLightbox = (index: number) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+  const goPrev = () => setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev));
+  const goNext = () => setLightboxIndex((prev) => (prev !== null && prev < galeria.length - 1 ? prev + 1 : prev));
+
   return (
     <>
       <section id="inicio" className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8">
@@ -131,10 +141,11 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
             {galeria.map((item, i) => (
-              <div
+              <button
                 key={i}
-                className="relative aspect-square rounded-xl overflow-hidden group"
-                style={{ background: "var(--surface-2)" }}
+                onClick={() => openLightbox(i)}
+                className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer"
+                style={{ background: "var(--surface-2)", border: "none", padding: 0 }}
               >
                 <Image
                   src={item.src}
@@ -143,9 +154,24 @@ export default function Home() {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                 />
-              </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 text-white text-2xl transition-opacity">🔍</span>
+                </div>
+              </button>
             ))}
           </div>
+
+          {lightboxIndex !== null && (
+            <Lightbox
+              src={galeria[lightboxIndex].src}
+              alt={galeria[lightboxIndex].alt}
+              onClose={closeLightbox}
+              onPrev={goPrev}
+              onNext={goNext}
+              hasPrev={lightboxIndex > 0}
+              hasNext={lightboxIndex < galeria.length - 1}
+            />
+          )}
         </div>
       </section>
 
